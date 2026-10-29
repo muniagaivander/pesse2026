@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteRule ^ceklatlong/?$ ceklatlong.php [L,QSA]
+RewriteRule ^(6400|6401|6402|6403|6404|6405|6409|6411|6471|6472|6474)/?$ public_dashboard.php?code=$1 [L,QSA]
+
+<FilesMatch "^(\.env.*|.*\.(sql|py|log)|setup_pes\.php)$">
+Require all denied
+</FilesMatch>
