@@ -7,3 +7,4 @@
 /migrations/*.py
 /migrations/dashboard_check.js
 *.log
+/output/pdf/*

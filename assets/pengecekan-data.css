@@ -1,0 +1,28 @@
+.dc-tabs-card .nav-link { color: #475569; font-weight: 600; }
+.dc-tabs-card .nav-link.active { color: #1d4ed8; border-top: 3px solid #2563eb; }
+.dc-data-info { background: linear-gradient(90deg,#fff7ed,#fffbeb); border-left: 5px solid #f59e0b; border-radius: 8px; color: #92400e; padding: 10px 14px; margin-bottom: 16px; }
+.dc-table-pane { height: 70vh; overflow: auto; scrollbar-gutter: stable; }
+.dc-table { border-collapse: separate; border-spacing: 0; font-size: 9pt; }
+.dc-table th { text-align: center; vertical-align: middle !important; min-width: 125px; }
+.dc-table thead th { position: sticky; top: 0; z-index: 8; background: #f8fafc; background-clip: padding-box; height: 78px; max-width: 180px; white-space: normal; }
+.dc-table thead a { display: block; color: inherit; padding: 5px; line-height: 1.3; }
+.dc-table td { vertical-align: middle; min-width: 125px; max-width: 270px; padding: 8px; }
+.dc-table .dc-first { position: sticky; left: 0; min-width: 205px; max-width: 260px; box-shadow: 3px 0 0 #111827; z-index: 7; background: #fff; }
+.dc-table thead .dc-first { z-index: 10; background: #f8fafc; }
+.dc-table tbody tr:nth-of-type(odd) .dc-first { background: #f9fafb; }
+.dc-table tbody tr:hover .dc-first { background: #eef2ff; }
+.dc-table .dc-green { background: #dcfce7; color: #14532d; }
+.dc-table .dc-yellow { background: #fef3c7; color: #78350f; }
+.dc-table .dc-blue { background: #dbeafe; color: #1e3a8a; }
+.dc-table tfoot th { background: #eff6ff; border-top: 2px solid #94a3b8; padding: 10px 8px; }
+.dc-number { font-variant-numeric: tabular-nums; }
+.dc-email { overflow-wrap: anywhere; font-size: 8pt; }
+.dc-table tr[hidden] { display: none !important; }
+.dc-toggle { border: 0; background: transparent; color: #1e40af; font: inherit; font-weight: 700; padding: 4px 0; text-align: left; cursor: pointer; }
+.dc-toggle [data-dc-sign] { display: inline-block; width: 22px; text-align: center; border: 1px solid #93c5fd; border-radius: 4px; margin-right: 4px; }
+.dc-toggle:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+.dc-table .dc-subtotal td, .dc-table .dc-subtotal .dc-first { background: #dbeafe; color: #1e3a8a; }
+.dc-table .dc-kec-subtotal td, .dc-table .dc-kec-subtotal .dc-first { background: #ecfdf5; color: #065f46; }
+.dc-table .dc-staff-kab th { text-align: left; background: #dbeafe; color: #1e3a8a; padding: 10px; border-top: 2px solid #93c5fd; }
+.dc-table tbody[data-dc-group] .dc-detail:first-of-type td { border-top: 2px solid #94a3b8; }
+@media (max-width: 767px) { .dc-tabs-card .nav-link { padding: 10px 12px; } .dc-table .dc-first { min-width: 170px; } }

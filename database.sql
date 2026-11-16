@@ -689,3 +689,29 @@ USE `pesse2026`;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2026-10-30  0:13:33
+
+-- Password awal semua akun selain admin6400: 123 (12 November 2026).
+UPDATE users SET password_hash='$2y$12$87mGp7x3SINe/GRk6VsUteNlL/E331T1YldI3fOLcVUiw64F9ffdO' WHERE username <> 'admin6400';
+
+-- Pengecekan data harian (12 November 2026).
+CREATE TABLE IF NOT EXISTS data_check_uploads (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  jenis VARCHAR(24) NOT NULL,
+  tanggal DATE NOT NULL,
+  filename VARCHAR(255) NOT NULL,
+  row_count INT UNSIGNED NOT NULL,
+  uploaded_by INT NOT NULL,
+  uploaded_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_check_upload_date (jenis, tanggal)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS data_check_rows (
+  jenis VARCHAR(24) NOT NULL,
+  tanggal DATE NOT NULL,
+  subsls_id VARCHAR(20) NOT NULL,
+  counts_json JSON NOT NULL,
+  upload_id BIGINT UNSIGNED NOT NULL,
+  PRIMARY KEY (jenis, tanggal, subsls_id),
+  INDEX idx_check_subsls (subsls_id),
+  CONSTRAINT fk_check_upload FOREIGN KEY (upload_id) REFERENCES data_check_uploads(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

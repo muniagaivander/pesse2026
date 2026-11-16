@@ -132,6 +132,7 @@ function render_header(string $title): void {
         <ul class="nav nav-pills nav-sidebar flex-column">
           <?php if ($user): ?>
             <li class="nav-item"><a class="nav-link<?= $isActive(['index.php', '']) ?>" href="index.php"><i class="nav-icon fas fa-chart-column"></i><p>Dashboard</p></a></li>
+            <li class="nav-item"><a class="nav-link<?= $isActive(['pengecekan_data.php']) ?>" href="pengecekan_data.php"><i class="nav-icon fas fa-list-check"></i><p>Pengecekan Data</p></a></li>
             <?php if (in_array($user['role'], ['superadmin','admin_kab'], true)): ?>
               <li class="nav-item"><a class="nav-link important-input-menu<?= $isActive(['input.php']) ?>" href="input.php"><i class="nav-icon fas fa-pen"></i><p>Input Harian</p></a></li>
             <?php endif; ?>
@@ -162,6 +163,7 @@ function render_header(string $title): void {
             <?php endif; ?>
             <?php if (in_array($user['role'], ['admin_kab','superadmin'], true)): ?>
               <li class="nav-item"><a class="nav-link<?= $isActive(['weekly_report.php']) ?>" href="weekly_report.php"><i class="nav-icon fas fa-file-lines"></i><p>Weekly Report</p></a></li>
+              <li class="nav-item"><a class="nav-link<?= $isActive(['daily_report.php']) ?>" href="daily_report.php"><i class="nav-icon fas fa-file-pdf"></i><p>Daily Report</p></a></li>
             <?php endif; ?>
             <?php if (in_array($user['role'], ['superadmin','admin_kab'], true)): ?>
               <li class="nav-item"><a class="nav-link" href="upload_petugas.php"><i class="nav-icon fas fa-file-import"></i><p>Upload Master Petugas</p></a></li>
