@@ -221,15 +221,15 @@ function wr_build_html(array $user, string $referenceDate): string
     $submitApprovePct = wr_pct($submitApproveTotal, (int)$totals['target']);
     $weeklyDeltaPct = round($submitApprovePct - wr_pct($baseSubmitApproveTotal, (int)$baseTotals['target']), 2);
     $selesaiPct = wr_pct((int)$totals['selesai_count'], (int)$totals['subsls_total']);
-    $targetDate = '2026-11-30';
+    $targetDate = PES_FIELDWORK_END;
     $remainingPct = max(0, 100 - $submitApprovePct);
     $weeksLeft = max(0.1, (strtotime($targetDate) - strtotime($periodEnd)) / (7 * 86400));
     $requiredWeeklyPct = round($remainingPct / $weeksLeft, 2);
     $projectedText = $weeklyDeltaPct <= 0
         ? 'Dengan kenaikan minggu ini yang belum positif, proyeksi penyelesaian perlu perhatian khusus.'
         : (($weeklyDeltaPct >= $requiredWeeklyPct)
-            ? 'Dengan ritme minggu ini, progress berpeluang mencapai 100% sebelum/sekitar 30 November 2026.'
-            : 'Dengan ritme minggu ini, progress belum cukup untuk mencapai 100% pada 30 November 2026.');
+            ? 'Dengan ritme minggu ini, progress berpeluang mencapai 100% sebelum/sekitar 27 November 2026.'
+            : 'Dengan ritme minggu ini, progress belum cukup untuk mencapai 100% pada 27 November 2026.');
 
     $trendLabels = [];
     $trendMap = [];
@@ -348,7 +348,7 @@ function wr_build_html(array $user, string $referenceDate): string
     <p class="summary">
       Progress Pendataan sampai akhir minggu ini mencapai <strong><?= number_format($submitApprovePct, 2, ',', '.') ?>%</strong>,
       naik <strong><?= number_format($weeklyDeltaPct, 2, ',', '.') ?> poin</strong> dibanding akhir minggu sebelumnya.
-      Untuk mencapai 100% pada 30 November 2026, rata-rata kenaikan yang dibutuhkan sekitar
+      Untuk mencapai 100% pada 27 November 2026, rata-rata kenaikan yang dibutuhkan sekitar
       <strong><?= number_format($requiredWeeklyPct, 2, ',', '.') ?> poin per minggu</strong>.
       <?= e($projectedText) ?>
       Wilayah dengan progress terendah perlu diprioritaskan untuk percepatan dan evaluasi hambatan lapangan.

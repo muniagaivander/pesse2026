@@ -2,6 +2,7 @@
 session_name('PESSE2026');
 session_start();
 require __DIR__ . '/config.php';
+require_once __DIR__ . '/fieldwork.php';
 
 function db(): PDO {
     static $pdo;
@@ -149,8 +150,9 @@ function progress_color_settings(?string $asOfDate = null): array {
     } catch (Throwable $e) {
         $asOf = new DateTimeImmutable('today', $timezone);
     }
-    $days = $asOf < $start ? 0 : min(30, (int)$start->diff($asOf)->days + 1);
-    $dailyTarget = 100 / 30;
+    $schedule = pes_fieldwork_schedule($asOf->format('Y-m-d'));
+    $days = $schedule['day'];
+    $dailyTarget = 100 / $schedule['duration'];
     $target = min(100.0, $days * $dailyTarget);
     $warningMin = min(100.0, max(0.0, ($days - 3) * $dailyTarget));
     return [

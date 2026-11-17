@@ -577,7 +577,7 @@ function performance_period_overlap_days(string $start, string $end, string $ran
 function performance_latest_completed_week(string $currentDate): ?array
 {
     $campaignStart = '2026-11-01';
-    $campaignEnd = '2026-11-30';
+    $campaignEnd = PES_FIELDWORK_END;
     $cursor = $campaignStart;
     $latest = null;
     $week = 1;
@@ -668,8 +668,8 @@ function performance_projected_finish(int $progress, int $target, float $recentA
 function performance_metric_row(array $meta, array $daily, string $asOf): array
 {
     $campaignStart = '2026-11-01';
-    $internalDeadline = '2026-11-30';
-    $campaignEnd = '2026-11-30';
+    $internalDeadline = PES_FIELDWORK_END;
+    $campaignEnd = PES_FIELDWORK_END;
     $target = (int)$meta['target'];
     $progress = min($target, max(0, (int)$meta['progress_count']));
     $planEnd = min($asOf, $internalDeadline);
@@ -738,8 +738,8 @@ function performance_metric_row(array $meta, array $daily, string $asOf): array
 function performance_weekly_metric_row(array $meta, array $daily, array $period): ?array
 {
     $campaignStart = '2026-11-01';
-    $internalDeadline = '2026-11-30';
-    $campaignEnd = '2026-11-30';
+    $internalDeadline = PES_FIELDWORK_END;
+    $campaignEnd = PES_FIELDWORK_END;
     $target = (int)$meta['target'];
     $progressBefore = 0.0;
     foreach ($daily as $date => $delta) {
@@ -793,7 +793,7 @@ function performance_metric_dataset(string $roleField, array $user, bool $limitT
         throw new InvalidArgumentException('Role petugas tidak valid.');
     }
     $campaignStart = '2026-11-01';
-    $asOf = min(max(today(), $campaignStart), '2026-11-30');
+    $asOf = min(max(today(), $campaignStart), PES_FIELDWORK_END);
     $weekPeriod = performance_latest_completed_week(today());
     $restrictKab = in_array($user['role'], ['admin_kab', 'viewer_kab'], true);
     $kabWhere = $restrictKab ? ' AND k.id=?' : '';
@@ -2326,6 +2326,8 @@ render_header($user['role'] === 'pengawas' ? 'Dashboard Pengawas' : ($user['role
     <div><strong><em>Progress Pendataan = Submit+Reject+Pending+Approve</em></strong></div>
   </div>
 <?php endif; ?>
+
+<?php if ($activeTab === 'submit_approve') require __DIR__ . '/monitoring_wilayah.php'; ?>
 
 <div class="card"><div class="card-body"><div class="dashboard-chart-wrap"><canvas id="dashboardChart"></canvas></div></div></div>
 

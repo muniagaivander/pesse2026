@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/fieldwork.php';
 $code = $_GET['code'] ?? '';
 if (!preg_match('/^64(00|01|02|03|04|09|71|72|74)$/', $code)) {
     http_response_code(404);
@@ -43,9 +44,10 @@ function public_progress_color_ranges(): array
 {
     $start = new DateTimeImmutable('2026-11-01', new DateTimeZone('Asia/Makassar'));
     $asOf = new DateTimeImmutable('today', new DateTimeZone('Asia/Makassar'));
-    $days = $asOf < $start ? 0 : min(30, (int)$start->diff($asOf)->days + 1);
-    $target = min(100.0, $days * (100 / 30));
-    $warningMin = min(100.0, max(0.0, ($days - 3) * (100 / 30)));
+    $schedule = pes_fieldwork_schedule($asOf->format('Y-m-d'));
+    $days = $schedule['day'];
+    $target = min(100.0, $days * (100 / $schedule['duration']));
+    $warningMin = min(100.0, max(0.0, ($days - 3) * (100 / $schedule['duration'])));
     return [
         ['key' => 'low', 'label' => '< ' . number_format($warningMin, 2, ',', '.') . '%', 'color' => '#dc2626', 'max' => $warningMin],
         ['key' => 'warning', 'label' => number_format($warningMin, 2, ',', '.') . '% - < ' . number_format($target, 2, ',', '.') . '%', 'color' => '#facc15', 'min' => $warningMin, 'max' => $target],
@@ -124,7 +126,7 @@ if (!$cache || empty($cache['dashboards'][$code])) {
     $topPencacah = $dashboard['top_pencacah'] ?? [];
     $fields = $cache['fields'];
     $statusColors = $cache['status_colors'];
-    $rangeColors = $cache['range_colors'] ?? public_progress_color_ranges();
+    $rangeColors = public_progress_color_ranges();
     if (empty($rangeColors[0]['max'])) {
         $rangeColors = public_progress_color_ranges();
     }

@@ -8,7 +8,7 @@ foreach(['2026-10-31','2026-12-01','2026-11-31'] as $d) {try{pes_require_period(
 foreach(['2026-11-01','2026-11-30'] as $d) pes_require_period($d);
 check(abs(progress_color_settings('2026-11-30')['target']-100)<0.001,'30 November target 100%');
 check(progress_color_settings('2026-10-31')['target']==0,'before campaign target 0%');
-check(progress_color_settings('2026-12-15')['day']===30,'campaign capped at 30 days');
+check(progress_color_settings('2026-12-15')['day']===27,'fieldwork capped at 27 days');
 try {pes_allocate(['role'=>'superadmin'],'6401010009000100','none@example.invalid','none2@example.invalid');throw new LogicException('non sample accepted');}catch(RuntimeException $e){check(str_contains($e->getMessage(),'bukan sampel'),'reject nonsample allocation');}
 $count=(int)db()->query('SELECT COUNT(*) FROM pes_sample_daily')->fetchColumn();
 db()->beginTransaction();
